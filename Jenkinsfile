@@ -4,7 +4,13 @@ pipeline {
   }
   agent {
     node{
-        label 'my_local_server'
+      label 'my_local_server'
+      stage('SonarQube Analysis') {
+        def scannerHome = tool 'mySonarQubeScanner';
+          withSonarQubeEnv() {
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
+      }
     }
   }
   environment {
