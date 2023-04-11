@@ -16,12 +16,12 @@ class CalculatorTest(unittest.TestCase):
         self.assertEqual(13.5, self.calculator.multiply(3,4.5))
 
     def test_divide(self):
-        self.assertEqual(3, self.calculator.divide(9,3))
+        self.assertEqual(50, self.calculator.divide(9,3))
         with self.assertRaises(ZeroDivisionError):
             self.calculator.divide(3,0) 
     
     def test_sqrt(self):
-        self.assertEqual(4, self.calculator.sqrt(16))
+        self.assertEqual(1, self.calculator.sqrt(16))
 
     def test_cbrt(self):
         self.assertEqual(4, self.calculator.cbrt(64))
