@@ -17,10 +17,14 @@ pipeline {
       }
     }
     stage('SonarQube Analysis') {
-      def scannerHome = tool 'SonarScanner';
-        withSonarQubeEnv() {
-          sh "${scannerHome}/bin/sonar-scanner"
-        }
+      withSonarQubeEnv('SonarQubeServer') { 
+        def sonarRunner = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+          sh """
+            ${sonarRunner}/bin/sonar-scanner \
+            -Dsonar.projectKey=your_project_key \
+            -Dsonar.sources=.
+          """
+      }
     }
     stage('Build Docker Image') { 
       steps {
