@@ -8,7 +8,7 @@ pipeline {
     }
   }
   environment {
-        CONTAINER_NAME = "flask-sample-app"
+        CONTAINER_NAME = "flask-sample-app" 
     }
   stages {  
     stage('Git Checkout') { 
