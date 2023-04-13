@@ -22,10 +22,15 @@ pipeline {
         checkout scm
       }
     }
-    stage('SonarQube Analysis') {
-      def scannerHome = tool 'SonarScanner';
-      withSonarQubeEnv() {
-        sh "${scannerHome}/bin/sonar-scanner"
+    stage('SonarQube analysis') {
+      steps {
+        script {
+          // requires SonarQube Scanner 2.8+
+          scannerHome = tool 'SonarScanner'
+        }
+        withSonarQubeEnv('SonarQube Scanner') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
       }
     }
     stage('Build Docker Image') { 
