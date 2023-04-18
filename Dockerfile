@@ -4,6 +4,8 @@ FROM python:3.7
 COPY . /app
 WORKDIR /app
 
+HEALTHCHECK NONE
+
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
