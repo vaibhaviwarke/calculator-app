@@ -7,7 +7,7 @@ WORKDIR /app
 HEALTHCHECK NONE
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir
 
 # Set image's main command and run the command within the container
 ENTRYPOINT ["python"]
