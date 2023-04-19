@@ -65,5 +65,10 @@ pipeline {
         }
       }
     }
+    stage('Run Test Pipeline') {
+      when {
+         expression {${Trigger test pipeline} == "Yes"}
+     } 
+    }
   }
 }
