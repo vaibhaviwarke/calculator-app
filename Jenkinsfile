@@ -69,6 +69,9 @@ pipeline {
       when {
          expression {${Trigger test pipeline} == "Yes"}
      } 
+     steps{
+      echo "Run test pipeline successfull"
+     }
     }
   }
 }
