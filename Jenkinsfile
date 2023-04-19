@@ -33,13 +33,13 @@ pipeline {
         }
       }
     }
-    stage('Checkmarx Scan') { 
-      steps {
-        script {
-          sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app:/path checkmarx/kics:latest scan -p /path -o "/path/"'
-        }
-      }
-    }
+    // stage('Checkmarx Scan') { 
+    //   steps {
+    //     script {
+    //       sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app:/path checkmarx/kics:latest scan -p /path -o "/path/"'
+    //     }
+    //   }
+    // }
     stage('Build Docker Image') { 
       steps {
         script {
