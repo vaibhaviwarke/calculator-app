@@ -1,6 +1,6 @@
 FROM python:3.7
-RUN adduser --system --group --no-create-home non-root-user
-USER non-root-user
+# RUN adduser --system --group --no-create-home non-root-user
+# USER non-root-user
 
 # Copy source file and python requirements and set the working directory to /app
 COPY . /app
