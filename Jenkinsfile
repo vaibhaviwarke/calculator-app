@@ -16,8 +16,8 @@ pipeline {
   environment {
         CONTAINER_NAME = "flask-sample-app" 
     }
-  stages {  
-    stage('Git Checkout') { 
+  stages {
+    stage('Git Checkout') {
       steps {
         checkout scm
       }
@@ -33,21 +33,28 @@ pipeline {
         }
       }
     }
-    // stage('Checkmarx Scan') { 
-    //   steps {
-    //     script {
-    //       sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app:/path checkmarx/kics:latest scan -p /path -o "/path/"'
-    //     }
-    //   }
-    // }
-    stage('Build Docker Image') { 
+    stage('Checkmarx Scan') {
+      steps {
+        script {
+          sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app:/path checkmarx/kics:latest scan -p /path -o "/path/"'
+        }
+      }
+    } 
+    stage('Artifact Manager') {
+      steps {
+        script {
+          sh 'python setup.py bdist_wheel'
+        }
+      }
+    }
+    stage('Build Docker Image') {
       steps {
         script {
           sh 'docker image build -t $CONTAINER_NAME:latest .'
         }
       }
     }
-    stage('Unit Testing') { 
+    stage('Unit Testing') {
       steps {
         script {
           sh 'docker stop $CONTAINER_NAME || true'
@@ -56,7 +63,7 @@ pipeline {
         }
       }
     }
-    stage('Run Docker Image') { 
+    stage('Run Docker Image') {
       steps {
         script {
           sh 'docker stop $CONTAINER_NAME || true'
@@ -65,13 +72,6 @@ pipeline {
         }
       }
     }
-    stage('Run Test Pipeline') {
-      when {
-         expression {${Trigger test pipeline} == "Yes"}
-     } 
-     steps{
-      echo "Run test pipeline successfull"
-     }
-    }
+    
   }
 }
