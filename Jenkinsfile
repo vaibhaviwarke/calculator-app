@@ -36,7 +36,7 @@ pipeline {
     stage('Checkmarx Scan') {
       steps {
         script {
-          sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app:/path checkmarx/kics:latest scan -p /path -o "/path/" -includeexcludepattern "*.py"'
+          sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app/code:/path checkmarx/kics:latest scan -p /path -o "/path/" '
         }
       }
     } 
@@ -59,7 +59,7 @@ pipeline {
     //     script {
     //       sh 'docker stop $CONTAINER_NAME || true'
     //       sh 'docker rm $CONTAINER_NAME || true'
-    //       sh 'docker run -dp 5000:5000 --name $CONTAINER_NAME $CONTAINER_NAME /bin/bash -c "python test_calculator.py"'
+    //       sh 'docker run -dp 5000:5000 --name $CONTAINER_NAME $CONTAINER_NAME /bin/bash -c "python test/test_calculator.py"'
     //     }
     //   }
     // }
