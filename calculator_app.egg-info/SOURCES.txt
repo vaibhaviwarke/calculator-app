@@ -4,3 +4,4 @@ calculator_app.egg-info/PKG-INFO
 calculator_app.egg-info/SOURCES.txt
 calculator_app.egg-info/dependency_links.txt
 calculator_app.egg-info/top_level.txt
+test/test_calculator.py

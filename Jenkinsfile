@@ -36,6 +36,7 @@ pipeline {
     stage('Checkmarx Scan') {
       steps {
         script {
+          sh 'pip install wheel'
           sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app/code:/path checkmarx/kics:latest scan -p /path -o "/path/" '
         }
       }
