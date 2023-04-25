@@ -36,7 +36,6 @@ pipeline {
     stage('Checkmarx Scan') {
       steps {
         script {
-          sh 'pip install wheel'
           sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app/code:/path checkmarx/kics:latest scan -p /path -o "/path/" '
         }
       }
@@ -44,6 +43,7 @@ pipeline {
     stage('Artifact Manager') {
       steps {
         script {
+          sh 'pip install && pip install wheel'
           sh 'python setup.py bdist_wheel'
         }
       }
