@@ -56,7 +56,7 @@ pipeline {
               [
                 artifactId: 'my-app',
                 classifier: '',
-                file: 'dist\\calculator-app-' + '0.0.1' + '-py3-none-any.whl',
+                file: 'dist/calculator_app-' + '0.0.1' + '-py3-none-any.whl',
                 type: 'whl'
               ]
           ]
