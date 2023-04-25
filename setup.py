@@ -6,7 +6,6 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="calculator-app",
-    setup_requires=['wheel'],
     # version="0.0.1",
     use_scm_version={
         'version_scheme': 'release-branch-semver',
