@@ -47,7 +47,7 @@ pipeline {
         nexusArtifactUploader(
           nexusVersion: 'nexus3',
           protocol: 'http',
-          nexusUrl: '65.0.102.236:9081',
+          nexusUrl: '65.0.102.236:9081/#admin/',
           groupId: 'com.nseit',
           version: '0.0.1',
           repository: 'calculator-app',
