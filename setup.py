@@ -6,7 +6,7 @@ import setuptools
 
 setuptools.setup(
     name="calculator-app",
-    # version="0.0.1",
+    version="0.0.1",
     use_scm_version={
         'version_scheme': 'release-branch-semver',
     },
