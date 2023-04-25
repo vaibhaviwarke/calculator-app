@@ -1,2 +1,5 @@
 __pycache__
 .venv
+dist/*
+calculator_app.egg-info
+build\bdist.win-amd64
