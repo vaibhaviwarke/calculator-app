@@ -43,6 +43,7 @@ pipeline {
     stage('Artifact Manager') {
       steps {
         script {
+          sh 'python -m pip install wheel'
           sh 'python setup.py bdist_wheel --universal'
         }
       }
