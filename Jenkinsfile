@@ -5,16 +5,11 @@ pipeline {
   agent {
     node{
       label 'my_local_server'
-      // stage('SonarQube Analysis') {
-      //   def scannerHome = tool 'mySonarQubeScanner';
-      //     withSonarQubeEnv() {
-      //       sh "${scannerHome}/bin/sonar-scanner"
-      //     }
-      // }
     }
   }
   environment {
         CONTAINER_NAME = "flask-sample-app" 
+        version = "0.0.1"
     }
   stages {
     stage('Git Checkout') {
@@ -43,15 +38,35 @@ pipeline {
     stage('Artifact Manager') {
       steps {
         script {
-          // sh 'pip3 install -r requirements.txt'
           sh 'python3 setup.py bdist_wheel'
         }
+      }
+    }
+    stage('Upload Artifacts to nexus') {
+      steps {
+        nexusArtifactUploader(
+          nexusVersion: 'nexus3',
+          protocol: 'http',
+          nexusUrl: '65.0.102.236:9081',
+          groupId: 'com.example',
+          version: $version,
+          repository: 'calculator-app',
+          credentialsId: 'nexus-credentials',
+          artifacts: [
+              [
+                artifactId: 'my-app',
+                classifier: '',
+                file: 'dist/calculator-app-' + $version + '-py3-none-any.whl',
+                type: 'whl'
+              ]
+          ]
+        )
       }
     }
     // stage('Build Docker Image') {
     //   steps {
     //     script {
-    //       sh 'docker image build -t $CONTAINER_NAME:latest .'
+    //       sh 'docker image build -t $CONTAINER_NAME:$version .'
     //     }
     //   }
     // }
@@ -73,6 +88,5 @@ pipeline {
     //     }
     //   }
     // }
-    
   }
 }
