@@ -44,26 +44,23 @@ pipeline {
     }
     stage('Upload Artifacts to nexus') {
       steps {
-        script{
-          nexusArtifactUploader artifacts: [[artifactId: 'artifact-id', classifier: '', file: 'dist/calculator_app-0.0.1-py3-none-any.whl', type: 'whl']], credentialsId: '79847b5e-f828-4a6f-b1a6-85a87be13c8f', groupId: 'my-groupid', nexusUrl: '65.0.102.236:9081', nexusVersion: 'nexus3', protocol: 'http', repository: 'calculator-app', version: '0.0.1'
-        }
-        // nexusArtifactUploader(
-        //   nexusVersion: 'nexus3',
-        //   protocol: 'http',
-        //   nexusUrl: '65.0.102.236:9081/#admin',
-        //   groupId: 'com.nseit',
-        //   version: '0.0.1',
-        //   repository: 'reposicalculator-app',
-        //   credentialsId: 'nexus',
-        //   artifacts: [
-        //       [
-        //         artifactId: 'calculator-app',
-        //         classifier: '',
-        //         file: 'dist/calculator_app-' + '0.0.1' + '-py3-none-any.whl',
-        //         type: 'whl'
-        //       ]
-        //   ]
-        // )
+        nexusArtifactUploader(
+          nexusVersion: 'nexus3',
+          protocol: 'http',
+          nexusUrl: '65.0.102.236:9081/#admin',
+          groupId: 'com.nseit',
+          version: '0.0.1',
+          repository: 'reposicalculator-app',
+          credentialsId: 'nexus',
+          artifacts: [
+              [
+                artifactId: 'calculator-app',
+                classifier: '',
+                file: 'dist/calculator_app-' + '0.0.1' + '-py3-none-any.whl',
+                type: 'whl'
+              ]
+          ]
+        )
       }
     }
     // stage('Build Docker Image') {
