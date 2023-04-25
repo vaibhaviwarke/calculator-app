@@ -48,13 +48,13 @@ pipeline {
           nexusVersion: 'nexus3',
           protocol: 'http',
           nexusUrl: '65.0.102.236:9081',
-          groupId: 'calculator-app',
+          groupId: 'com.nseit',
           version: '0.0.1',
           repository: 'calculator-app',
-          credentialsId: 'nexus-credentials',
+          credentialsId: '79847b5e-f828-4a6f-b1a6-85a87be13c8f',
           artifacts: [
               [
-                artifactId: 'my-app',
+                artifactId: 'calculator-app',
                 classifier: '',
                 file: 'dist/calculator_app-' + '0.0.1' + '-py3-none-any.whl',
                 type: 'whl'
