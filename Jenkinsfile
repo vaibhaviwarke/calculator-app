@@ -43,7 +43,7 @@ pipeline {
     stage('Artifact Manager') {
       steps {
         script {
-          sh 'pip install -r requirements.txt'
+          sh 'pip3 install -r requirements.txt'
           sh 'python3 setup.py bdist_wheel'
         }
       }
