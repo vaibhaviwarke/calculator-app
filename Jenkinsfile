@@ -43,7 +43,7 @@ pipeline {
     stage('Artifact Manager') {
       steps {
         script {
-          sh 'sudo apt install python-pip'
+          sh 'apt install python-pip'
           sh 'python setup.py bdist_wheel --universal'
         }
       }
