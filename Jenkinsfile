@@ -47,10 +47,10 @@ pipeline {
         nexusArtifactUploader(
           nexusVersion: 'nexus3',
           protocol: 'http',
-          nexusUrl: '65.0.102.236:9081/#admin',
+          nexusUrl: '65.0.102.236:9081',
           groupId: 'com.nseit',
           version: '0.0.1',
-          repository: 'reposicalculator-app',
+          repository: 'calculator-app',
           credentialsId: 'nexus',
           artifacts: [
               [
