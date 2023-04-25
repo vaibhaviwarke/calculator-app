@@ -49,14 +49,14 @@ pipeline {
           protocol: 'http',
           nexusUrl: '65.0.102.236:9081',
           groupId: 'com.example',
-          version: $version,
+          version: '0.0.1',
           repository: 'calculator-app',
           credentialsId: 'nexus-credentials',
           artifacts: [
               [
                 artifactId: 'my-app',
                 classifier: '',
-                file: 'dist/calculator-app-' + $version + '-py3-none-any.whl',
+                file: 'dist/calculator-app-' + '0.0.1' + '-py3-none-any.whl',
                 type: 'whl'
               ]
           ]
