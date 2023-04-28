@@ -51,7 +51,7 @@ pipeline {
           groupId: 'com.nseit',
           version: '0.0.1',
           repository: 'calculator-app',
-          // credentialsId: 'nexus',
+          credentialsId: 'nexus-cred',
           artifacts: [
               [
                 artifactId: 'calculator-app',
