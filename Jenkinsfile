@@ -9,7 +9,9 @@ pipeline {
   }
   environment {
         CONTAINER_NAME = "flask-sample-app" 
-        version = "0.0.1"
+        ARTIFACT_VERSION = "0.0.1"
+        NEXUS_URL = "13.233.112.7:9081"
+        NEXUS_REPOSITORY = "calculator-app"
     }
   stages {
     stage('Git Checkout') {
@@ -47,10 +49,10 @@ pipeline {
         nexusArtifactUploader(
           nexusVersion: 'nexus3',
           protocol: 'http',
-          nexusUrl: '13.233.112.7:9081',
+          nexusUrl: "$NEXUS_URL",
           groupId: 'calculator-app',
-          version: '0.0.2',
-          repository: 'calculator-app',
+          version: '0.0.1',
+          repository: "calculator-app",
           credentialsId: 'nexus-cred',
           artifacts: [
               [
