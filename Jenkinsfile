@@ -49,7 +49,7 @@ pipeline {
           protocol: 'http',
           nexusUrl: '13.233.112.7:9081',
           groupId: 'calculator-app',
-          version: '0.0.1',
+          version: '0.0.2',
           repository: 'calculator-app',
           credentialsId: 'nexus-cred',
           artifacts: [
