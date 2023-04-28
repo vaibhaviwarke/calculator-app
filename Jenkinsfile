@@ -76,7 +76,7 @@ pipeline {
     stage('Unit Testing') {
       steps {
         script {
-          sh 'python test/test_calculator.py'
+          sh 'python src/test_calculator.py'
           // sh 'docker stop $CONTAINER_NAME || true'
           // sh 'docker rm $CONTAINER_NAME || true'
           // sh 'docker run -dp 5000:5000 --name $CONTAINER_NAME $CONTAINER_NAME /bin/bash -c "python test/test_calculator.py"'
