@@ -20,59 +20,24 @@ pipeline {
         checkout scm
       }
     }
-    // stage('SonarQube analysis') {
-    //   steps {
-    //     script {
-    //       // requires SonarQube Scanner 2.8+
-    //       scannerHome = tool 'SonarScanner'
-    //     }
-    //     withSonarQubeEnv('SonarScanner') {
-    //       sh "${scannerHome}/bin/sonar-scanner"
-    //     }
-    //   }
-    // }
-    // stage('Checkmarx Scan') {
-    //   steps {
-    //     script {
-    //       sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app/code:/path checkmarx/kics:latest scan -p /path -o "/path/"'
-    //     }
-    //   }
-    // } 
-    // stage('Artifact Manager') {
-    //   steps {
-    //     script {
-    //       sh 'python3 setup.py bdist_wheel'
-    //     }
-    //   }
-    // }
-    // stage('Upload Artifacts to nexus') {
-    //   steps {
-    //     nexusArtifactUploader(
-    //       nexusVersion: 'nexus3',
-    //       protocol: 'http',
-    //       nexusUrl: "$NEXUS_URL",
-    //       groupId: 'calculator-app',
-    //       version: "$VERSION",
-    //       repository: "$NEXUS_REPOSITORY",
-    //       credentialsId: "$NEXUS_CREDENTIALS",
-    //       artifacts: [
-    //           [
-    //             artifactId: 'calculator-app',
-    //             classifier: '',
-    //             file: 'dist/calculator_app-' + "$VERSION" +'-py3-none-any.whl',
-    //             type: 'whl'
-    //           ]
-    //       ]
-    //     )
-    //   }
-    // }
-    // stage('Build Docker Image') {
-    //   steps {
-    //     script {
-    //       sh "docker image build -t $CONTAINER_NAME:$VERSION ."
-    //     }
-    //   }
-    // }
+    stage('SonarQube analysis') {
+      steps {
+        script {
+          // requires SonarQube Scanner 2.8+
+          scannerHome = tool 'SonarScanner'
+        }
+        withSonarQubeEnv('SonarScanner') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+      }
+    }
+    stage('Checkmarx Scan') {
+      steps {
+        script {
+          sh 'docker run -t -v /var/lib/jenkins/workspace/calculator-app/src:/path checkmarx/kics:latest scan -p /path -o "/path/"'
+        }
+      }
+    } 
     stage('Unit Testing') {
       steps {
         script {
@@ -83,14 +48,50 @@ pipeline {
         }
       }
     }
-    // stage('Run Docker Image') {
-    //   steps {
-    //     script {
-    //       sh 'docker stop $CONTAINER_NAME || true'
-    //       sh 'docker rm $CONTAINER_NAME || true'
-    //       sh 'docker run -dp 5000:5000 --name $CONTAINER_NAME $CONTAINER_NAME'
-    //     }
-    //   }
-    // }
+    stage('Artifact Manager') {
+      steps {
+        script {
+          sh 'python3 setup.py bdist_wheel'
+        }
+      }
+    }
+    stage('Upload Artifacts to nexus') {
+      steps {
+        nexusArtifactUploader(
+          nexusVersion: 'nexus3',
+          protocol: 'http',
+          nexusUrl: "$NEXUS_URL",
+          groupId: 'calculator-app',
+          version: "$VERSION",
+          repository: "$NEXUS_REPOSITORY",
+          credentialsId: "$NEXUS_CREDENTIALS",
+          artifacts: [
+              [
+                artifactId: 'calculator-app',
+                classifier: '',
+                file: 'dist/calculator_app-' + "$VERSION" +'-py3-none-any.whl',
+                type: 'whl'
+              ]
+          ]
+        )
+      }
+    }
+    stage('Build Docker Image') {
+      steps {
+        script {
+          sh "docker image build -t $CONTAINER_NAME:$VERSION ."
+        }
+      }
+    }
+    
+    stage('Run Docker Image') {
+      steps {
+        script {
+          sh 'docker stop $CONTAINER_NAME || true'
+          sh 'docker rm $CONTAINER_NAME || true'
+          sh 'docker run -dp 5000:5000 --name $CONTAINER_NAME $CONTAINER_NAME'
+        }
+      }
+    }
   }
 }

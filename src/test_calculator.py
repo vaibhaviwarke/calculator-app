@@ -21,10 +21,10 @@ class CalculatorTest(unittest.TestCase):
             self.calculator.divide(3,0) 
     
     def test_sqrt(self):
-        self.assertEqual(1, self.calculator.sqrt(16))
+        self.assertEqual(4, self.calculator.sqrt(16))
 
     def test_cbrt(self):
-        self.assertEqual(4, self.calculator.cbrt(64))
+        self.assertEqual(1, self.calculator.cbrt(64))
 
     def test_exp(self):
         self.assertEqual(32, self.calculator.exp(2,5))
@@ -33,4 +33,4 @@ class CalculatorTest(unittest.TestCase):
         self.assertEqual(120, self.calculator.factorial(5))
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main() 
