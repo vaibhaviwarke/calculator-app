@@ -48,7 +48,7 @@ pipeline {
           nexusVersion: 'nexus3',
           protocol: 'http',
           nexusUrl: '13.233.112.7:9081',
-          groupId: 'com.nseit',
+          groupId: 'calculator-app',
           version: '0.0.1',
           repository: 'calculator-app',
           credentialsId: 'nexus-cred',
