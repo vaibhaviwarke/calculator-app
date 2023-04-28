@@ -50,7 +50,7 @@ pipeline {
           nexusUrl: '13.233.112.7:9081',
           groupId: 'calculator-app',
           version: '0.0.2',
-          repository: 'raw-repo',
+          repository: 'calculator-app',
           credentialsId: 'nexus-cred',
           artifacts: [
               [
