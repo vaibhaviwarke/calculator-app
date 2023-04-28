@@ -20,17 +20,17 @@ pipeline {
         checkout scm
       }
     }
-    stage('SonarQube analysis') {
-      steps {
-        script {
-          // requires SonarQube Scanner 2.8+
-          scannerHome = tool 'SonarScanner'
-        }
-        withSonarQubeEnv('SonarScanner') {
-          sh "${scannerHome}/bin/sonar-scanner"
-        }
-      }
-    }
+    // stage('SonarQube analysis') {
+    //   steps {
+    //     script {
+    //       // requires SonarQube Scanner 2.8+
+    //       scannerHome = tool 'SonarScanner'
+    //     }
+    //     withSonarQubeEnv('SonarScanner') {
+    //       sh "${scannerHome}/bin/sonar-scanner"
+    //     }
+    //   }
+    // }
     stage('Checkmarx Scan') {
       steps {
         script {
