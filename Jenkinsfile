@@ -12,6 +12,7 @@ pipeline {
         ARTIFACT_VERSION = "0.0.1"
         NEXUS_URL = "13.233.112.7:9081"
         NEXUS_REPOSITORY = "calculator-app"
+        NEXUS_CREDENTIALS = "nexus-cred"
     }
   stages {
     stage('Git Checkout') {
@@ -51,14 +52,14 @@ pipeline {
           protocol: 'http',
           nexusUrl: "$NEXUS_URL",
           groupId: 'calculator-app',
-          version: '0.0.1',
-          repository: "calculator-app",
-          credentialsId: 'nexus-cred',
+          version: "$ARTIFACT_VERSION",
+          repository: "$NEXUS_REPOSITORY",
+          credentialsId: "$NEXUS_CREDENTIALS",
           artifacts: [
               [
                 artifactId: 'calculator-app',
                 classifier: '',
-                file: 'dist/calculator_app-0.0.1-py3-none-any.whl',
+                file: 'dist/calculator_app-' + "$ARTIFACT_VERSION" +'-py3-none-any.whl',
                 type: 'whl'
               ]
           ]
