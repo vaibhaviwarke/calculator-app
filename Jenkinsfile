@@ -10,7 +10,7 @@ pipeline {
   environment {
         CONTAINER_NAME = "flask-sample-app" 
         VERSION = "0.0.3"
-        NEXUS_URL = "43.205.146.251:9081"
+        NEXUS_URL = "35.154.217.211:9081"
         NEXUS_REPOSITORY = "calculator-app"
         NEXUS_CREDENTIALS = "nexus-cred"
     }
